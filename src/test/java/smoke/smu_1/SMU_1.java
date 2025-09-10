@@ -48,10 +48,18 @@ public class SMU_1 {
 
     @Test
     public void testTwoServicesColumsDisplayed() {
-        WebElement services = driver.findElement(By.xpath("//*[@class='services']"));
-        Assert.assertTrue(services.isDisplayed(), "the feft service colum is displayed");
+        WebElement servicesOne = driver.findElement(By.xpath("//*[@class='services']"));
+        Assert.assertTrue(servicesOne.isDisplayed(), "the feft service colum is displayed");
 
-        WebElement servicestwo = driver.findElement(By.xpath("//*[@class='servicestwo']"));
-        Assert.assertTrue(servicestwo.isDisplayed(), "the right service colum is displayed");
+        WebElement servicesTwo = driver.findElement(By.xpath("//*[@class='servicestwo']"));
+        Assert.assertTrue(servicesTwo.isDisplayed(), "the right service colum is displayed");
     }
+
+    @Test
+    public void testLatestNewsSectionDisplayed() {
+        WebElement newsSection = driver.findElement(By.xpath("//h4[text()='Latest News']"));
+        Assert.assertTrue(newsSection.isDisplayed(), "the Latest News displayed");
+    }
+
+
 }
