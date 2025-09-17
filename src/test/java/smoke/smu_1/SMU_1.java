@@ -18,7 +18,6 @@ public class SMU_1 {
     @BeforeMethod
     public void setupDriver() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
         options.addArguments("--disable-features=PasswordChangeDetection,PasswordLeakDetection,AutofillKeyedPasswords");
         options.addArguments("--incognito");
         options.addArguments("--disable-popup-blocking");
