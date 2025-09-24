@@ -1,0 +1,60 @@
+package pages;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
+
+public class RegistrationPage {
+    private WebDriver driver;
+
+    // Локатори для полів форми реєстрації
+    private By firstNameInput = By.id("customer.firstName");
+    private By lastNameInput = By.id("customer.lastName");
+    private By streetInput = By.id("customer.address.street");
+    private By cityInput = By.id("customer.address.city");
+    private By stateInput = By.id("customer.address.state");
+    private By zipCodeInput = By.id("customer.address.zipCode");
+    private By phoneNumberInput = By.id("customer.phoneNumber");
+    private By ssnInput = By.id("customer.ssn");
+    private By usernameInput = By.id("customer.username");
+    private By passwordInput = By.id("customer.password");
+    private By repeatedPasswordInput = By.id("repeatedPassword");
+
+    // Локатор для кнопки реєстрації (submit)
+    private By submitButton = By.cssSelector("input.button");
+
+    // Локатор для повідомлення про помилку
+    private By errorMessage = By.className("error");
+
+    // Конструктор для Registration Page
+    public RegistrationPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    // Метод для заповення форми реєстрації
+    public void fillForm(String firstName, String lastName, String street,
+                         String city, String state, String zipCode,
+                         String phoneNumber, String ssn,
+                         String username, String password, String repeatedPassword) {
+
+        driver.findElement(firstNameInput).sendKeys(firstName);
+        driver.findElement(lastNameInput).sendKeys(lastName);
+        driver.findElement(streetInput).sendKeys(street);
+        driver.findElement(cityInput).sendKeys(city);
+        driver.findElement(stateInput).sendKeys(state);
+        driver.findElement(zipCodeInput).sendKeys(zipCode);
+        driver.findElement(phoneNumberInput).sendKeys(phoneNumber);
+        driver.findElement(ssnInput).sendKeys(ssn);
+        driver.findElement(usernameInput).sendKeys(username);
+        driver.findElement(passwordInput).sendKeys(password);
+        driver.findElement(repeatedPasswordInput).sendKeys(repeatedPassword);
+    }
+
+    // Метод для натискання кнопки submit
+    public void submitForm() {
+        driver.findElement(submitButton).click();
+    }
+
+    public String getErrorMessageText() {
+        return driver.findElement(errorMessage).getText();
+    }
+}

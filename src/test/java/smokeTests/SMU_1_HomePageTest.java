@@ -1,4 +1,4 @@
-package HomePageSmokeTests;
+package smokeTests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -7,11 +7,11 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import HomePageSmoke.HomePage;
+import pages.HomePage;
 
 import java.time.Duration;
 
-public class SMU_1HomePageTest {
+public class SMU_1_HomePageTest {
     private WebDriver driver;
     private HomePage homePage;
 

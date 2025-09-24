@@ -1,17 +1,17 @@
-package HomePageSmokeTests;
+package smokeTests;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import HomePageSmoke.HomePage;
+import pages.HomePage;
 
 import java.time.Duration;
 import java.util.List;
 import java.util.Arrays;
 
-public class SMU_2HomePageTest {
+public class SMU_2_HomePageTest {
     private WebDriver driver;
     private HomePage homePage;
 
@@ -61,7 +61,7 @@ public class SMU_2HomePageTest {
                 "Transfer Funds"
         );
 
-        Assert.assertEquals(homePage.getOnlineServicesText(),
+        Assert.assertEquals(homePage.getOnlineServicesTexts(),
                 expectedOnlineServices,
                 "Список послуг Online Services не відповідає очікуваному!");
 
