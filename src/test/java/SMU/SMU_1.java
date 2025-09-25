@@ -1,4 +1,4 @@
-package smokeTests;
+package SMU;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +11,7 @@ import pages.HomePage;
 
 import java.time.Duration;
 
-public class SMU_1_HomePageTest {
+public class SMU_1 {
     private WebDriver driver;
     private HomePage homePage;
 

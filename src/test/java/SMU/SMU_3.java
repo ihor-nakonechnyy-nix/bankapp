@@ -1,4 +1,4 @@
-package smokeTests;
+package SMU;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,7 +15,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-public class SMU_3_HomePageTest {
+public class SMU_3 {
     private WebDriver driver;
 
     @BeforeMethod
