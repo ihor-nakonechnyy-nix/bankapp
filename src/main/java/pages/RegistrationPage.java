@@ -20,10 +20,15 @@ public class RegistrationPage {
     private By repeatedPasswordInput = By.id("repeatedPassword");
 
     // Локатор для кнопки реєстрації (submit)
-    private By submitButton = By.cssSelector("input.button");
+    private By submitButton = By.xpath("//input[@value='Register']");
 
-    // Локатор для повідомлення про помилку
-    private By errorMessage = By.className("error");
+    // Локаторит повідомленню про помилки
+    private By customerUsernameError = By.id("customer.username.errors");
+    private By PasswordError = By.id("customer.password.errors");
+    private By repeatedPasswordError = By.id("repeatedPassword.errors");
+
+
+
 
     // Конструктор для Registration Page
     public RegistrationPage(WebDriver driver) {
@@ -31,10 +36,10 @@ public class RegistrationPage {
     }
 
     // Метод для заповення форми реєстрації
-    public void fillForm(String firstName, String lastName, String street,
-                         String city, String state, String zipCode,
-                         String phoneNumber, String ssn,
-                         String username, String password, String repeatedPassword) {
+    public void fillFormForExistUserVerification (String firstName, String lastName, String street,
+                              String city, String state, String zipCode,
+                              String phoneNumber, String ssn,
+                              String username, String password, String repeatedPassword) {
 
         driver.findElement(firstNameInput).sendKeys(firstName);
         driver.findElement(lastNameInput).sendKeys(lastName);
@@ -49,12 +54,36 @@ public class RegistrationPage {
         driver.findElement(repeatedPasswordInput).sendKeys(repeatedPassword);
     }
 
+    // Метод для заповення форми реєстрації
+    public void fillFormForPasswordVerification (String firstName, String lastName, String street,
+                              String city, String state, String zipCode,
+                              String phoneNumber, String ssn,
+                              String username) {
+
+        driver.findElement(firstNameInput).sendKeys(firstName);
+        driver.findElement(lastNameInput).sendKeys(lastName);
+        driver.findElement(streetInput).sendKeys(street);
+        driver.findElement(cityInput).sendKeys(city);
+        driver.findElement(stateInput).sendKeys(state);
+        driver.findElement(zipCodeInput).sendKeys(zipCode);
+        driver.findElement(phoneNumberInput).sendKeys(phoneNumber);
+        driver.findElement(ssnInput).sendKeys(ssn);
+        driver.findElement(usernameInput).sendKeys(username);
+
+    }
     // Метод для натискання кнопки submit
     public void submitForm() {
         driver.findElement(submitButton).click();
     }
 
-    public String getErrorMessageText() {
-        return driver.findElement(errorMessage).getText();
+    public String getUserErrorMessageText() {
+        return driver.findElement(customerUsernameError).getText();
+    }
+
+    public String getPasswordErrorMessageText() {
+        return driver.findElement(PasswordError).getText();
+    }
+    public String getRepeatPasswordErrorMessageText() {
+        return driver.findElement(repeatedPasswordError).getText();
     }
 }

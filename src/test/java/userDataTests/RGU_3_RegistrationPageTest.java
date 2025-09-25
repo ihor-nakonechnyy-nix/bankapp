@@ -4,16 +4,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
-import org.testng.annotations.*;
-
-import pages.HomePage;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import pages.RegistrationPage;
 
 import java.time.Duration;
 
-public class RGU_2_RegistrationPageTest {
+public class RGU_3_RegistrationPageTest {
     private WebDriver driver;
-    private HomePage homePage;
     private RegistrationPage registrationPage;
 
     @BeforeMethod
@@ -26,22 +25,17 @@ public class RGU_2_RegistrationPageTest {
         driver = new ChromeDriver(options);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-        driver.get("http://localhost:8080/parabank/index.htm");
+        driver.get("http://localhost:8080/parabank/register.htm");
 
-        homePage = new HomePage(driver);
         registrationPage = new RegistrationPage(driver);
 
     }
 
     @Test
-    public void testUserRegistration() {
-        homePage.registrationPageLink.click();
-
-        // Переходимо на сторінку реєстрації
-        homePage.goToRegistration();
+    public void testUserRegistration2() {
 
         // Заповнюємо форму реєстрації
-        registrationPage.fillFormForExistUserVerification(
+        registrationPage.fillFormForPasswordVerification(
                 "john",
                 "Dou",
                 "Marina Bay",
@@ -50,24 +44,30 @@ public class RGU_2_RegistrationPageTest {
                 "7007",
                 "333-555-777",
                 "111-888",
-                "john",
-                "demo",
-                "demo");
+                "john");
 
         // Відправляємо форму
         registrationPage.submitForm();
+
+        String PasswordErrorMessageTest = registrationPage.getPasswordErrorMessageText();
+        Assert.assertEquals(PasswordErrorMessageTest, "Password is required.");
+
+        String repeatedPasswordErrorTest = registrationPage.getRepeatPasswordErrorMessageText();
+        Assert.assertEquals(repeatedPasswordErrorTest, "Password confirmation is required.");
     }
 
-    @AfterClass
+
+
+
+    @AfterMethod
     public void teardown() {
         if (driver != null) {
             //driver.quit(); // Закриваємо браузер
         }
-
-        String actualError = registrationPage.getUserErrorMessageText();
-        Assert.assertEquals(actualError, "This username already exists.");
     }
-
 }
+
+
+
 
 
