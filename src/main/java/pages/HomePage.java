@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +14,7 @@ UI:
 RGU-2
 RGU-3
 ACU-5
-ADU-3
+    ADU-3
 
 API:
 RGA-2
@@ -35,6 +34,10 @@ public class HomePage {
     // Локатор для посилання на сторінку реестрації
     @FindBy(linkText = "Register")
     public WebElement registrationPageLink;
+
+    // Локатор для посилання на сторінку Request Loan
+    @FindBy(linkText = "Request Loan")
+    public WebElement requestLoanLink;
 
     //Локатори для обєктів на Home page
 
@@ -65,6 +68,14 @@ public class HomePage {
     // Online Services list
     @FindBy(css = "ul.servicestwo li:not(.captionone) a")
     private List<WebElement> onlineServices;
+
+    // Локатори для Username та Password та
+    @FindBy(name = "username")
+    private WebElement userlogin;
+    @FindBy(name = "password")
+    private WebElement userPassword;
+    @FindBy(css = "input.button[type='submit']")
+    private WebElement logInButton;
 
 
     // Методи для перевірок обєктів Home Page
@@ -104,11 +115,19 @@ public class HomePage {
     }
 
     // Періхід на сторінку реєстрації клієнта
-//    public void open(String baseUrl) {
-//        driver.get(baseUrl);
-//    }
-
     public void goToRegistration() {
         registrationPageLink.click();
+    }
+
+    // Періхід на сторінку реєстрації клієнта
+    public void goRequestLoanPage() {
+        requestLoanLink.click();
+    }
+
+
+    public void userLogIn() {
+        userlogin.sendKeys("ihor");
+        userPassword.sendKeys("demo");
+        logInButton.click();
     }
 }

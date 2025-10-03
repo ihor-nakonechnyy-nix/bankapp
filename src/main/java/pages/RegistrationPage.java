@@ -22,12 +22,10 @@ public class RegistrationPage {
     // Локатор для кнопки реєстрації (submit)
     private By submitButton = By.xpath("//input[@value='Register']");
 
-    // Локаторит повідомленню про помилки
+    // Локатори повідомленню про помилки
     private By customerUsernameError = By.id("customer.username.errors");
     private By PasswordError = By.id("customer.password.errors");
     private By repeatedPasswordError = By.id("repeatedPassword.errors");
-
-
 
 
     // Конструктор для Registration Page
@@ -36,10 +34,10 @@ public class RegistrationPage {
     }
 
     // Метод для заповення форми реєстрації
-    public void fillFormForExistUserVerification (String firstName, String lastName, String street,
-                              String city, String state, String zipCode,
-                              String phoneNumber, String ssn,
-                              String username, String password, String repeatedPassword) {
+    public void fillFormForExistUserVerification(String firstName, String lastName, String street,
+                                                 String city, String state, String zipCode,
+                                                 String phoneNumber, String ssn,
+                                                 String username, String password, String repeatedPassword) {
 
         driver.findElement(firstNameInput).sendKeys(firstName);
         driver.findElement(lastNameInput).sendKeys(lastName);
@@ -55,10 +53,10 @@ public class RegistrationPage {
     }
 
     // Метод для заповення форми реєстрації
-    public void fillFormForPasswordVerification (String firstName, String lastName, String street,
-                              String city, String state, String zipCode,
-                              String phoneNumber, String ssn,
-                              String username) {
+    public void fillFormForPasswordVerification(String firstName, String lastName, String street,
+                                                String city, String state, String zipCode,
+                                                String phoneNumber, String ssn,
+                                                String username) {
 
         driver.findElement(firstNameInput).sendKeys(firstName);
         driver.findElement(lastNameInput).sendKeys(lastName);
@@ -71,11 +69,13 @@ public class RegistrationPage {
         driver.findElement(usernameInput).sendKeys(username);
 
     }
+
     // Метод для натискання кнопки submit
     public void submitForm() {
         driver.findElement(submitButton).click();
     }
 
+    // Методи для оотримання повідомлень про помилки
     public String getUserErrorMessageText() {
         return driver.findElement(customerUsernameError).getText();
     }
@@ -83,6 +83,7 @@ public class RegistrationPage {
     public String getPasswordErrorMessageText() {
         return driver.findElement(PasswordError).getText();
     }
+
     public String getRepeatPasswordErrorMessageText() {
         return driver.findElement(repeatedPasswordError).getText();
     }
