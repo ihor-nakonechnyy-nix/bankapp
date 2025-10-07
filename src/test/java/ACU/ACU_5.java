@@ -48,7 +48,7 @@ public class ACU_5 {
 
     @Test
     public void testApplyLoan() {
-        homePage.userLogIn();
+        homePage.userLogIn("ihor", "demo");
         homePage.goRequestLoanPage();
         requestLoanPage.applyForLoan(100, 20);
 //        requestLoanPage.getLoanRequestProcessedTitle();
@@ -60,14 +60,18 @@ public class ACU_5 {
 
         // отримуємо дату зі сторінки
         String actualDateStr = requestLoanPage.getResponseDate();
-
-        // парсимо отримануц дату
+        // парсимо отриману дату
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-d-yyyy");
         LocalDate actualDate = LocalDate.parse(actualDateStr, formatter);
-
         // сьогоднішня дата
         LocalDate today = LocalDate.now();
         Assert.assertEquals(actualDate, today, "Дата не співпадає з сьогоднішньою!");
+
+
+
+
+
+
         // переходимо на сторінку Accounts Overview
         requestLoanPage.goAccountsOverviewPage();
 
