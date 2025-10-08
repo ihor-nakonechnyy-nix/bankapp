@@ -6,6 +6,11 @@ import org.openqa.selenium.By;
 public class RegistrationPage {
     private WebDriver driver;
 
+    // Конструктор для Registration Page
+    public RegistrationPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
     // Локатори для полів форми реєстрації
     private By firstNameInput = By.id("customer.firstName");
     private By lastNameInput = By.id("customer.lastName");
@@ -27,11 +32,6 @@ public class RegistrationPage {
     private By PasswordError = By.id("customer.password.errors");
     private By repeatedPasswordError = By.id("repeatedPassword.errors");
 
-
-    // Конструктор для Registration Page
-    public RegistrationPage(WebDriver driver) {
-        this.driver = driver;
-    }
 
     // Метод для заповення форми реєстрації
     public void fillFormForExistUserVerification(String firstName, String lastName, String street,

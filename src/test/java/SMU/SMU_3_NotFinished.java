@@ -15,7 +15,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 
-public class SMU_3 {
+// ПОТРІБНО ЗАКІНЧИТИ
+
+public class SMU_3_NotFinished {
     private WebDriver driver;
 
     @BeforeMethod

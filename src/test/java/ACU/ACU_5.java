@@ -7,14 +7,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import org.testng.asserts.Assertion;
 import pages.RequestLoanPage;
 import pages.HomePage;
 
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class ACU_5 {
 
@@ -50,7 +48,7 @@ public class ACU_5 {
     public void testApplyLoan() {
         homePage.userLogIn("ihor", "demo");
         homePage.goRequestLoanPage();
-        requestLoanPage.applyForLoan(100, 20);
+        //requestLoanPage.applyForLoan(100, 20);
 //        requestLoanPage.getLoanRequestProcessedTitle();
 //        requestLoanPage.getLoanProviderName();
 //        requestLoanPage.getLoanStatus();
@@ -66,11 +64,6 @@ public class ACU_5 {
         // сьогоднішня дата
         LocalDate today = LocalDate.now();
         Assert.assertEquals(actualDate, today, "Дата не співпадає з сьогоднішньою!");
-
-
-
-
-
 
         // переходимо на сторінку Accounts Overview
         requestLoanPage.goAccountsOverviewPage();

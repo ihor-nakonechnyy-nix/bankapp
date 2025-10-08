@@ -14,7 +14,8 @@ UI:
 RGU-2
 RGU-3
 ACU-5
-    ADU-3
+ADU-3
+
 API:
 RGA-2
 ACA-1
@@ -151,5 +152,6 @@ public class HomePage { // POM-клас, що представляє сторі�
         userLogin.sendKeys(username);
         userPassword.sendKeys(password);
         logInButton.click();
+
     }
 }
