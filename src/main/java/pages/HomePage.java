@@ -1,95 +1,78 @@
 package pages;
 
-import org.openqa.selenium.WebDriver; // WebDriver — інтерфейс Selenium, який керує браузером (запуск, навігація, т.д.). У класі зберігається щоб виконувати дії
-import org.openqa.selenium.WebElement; // інтерфейс, що представляє HTML-елемент сторінки (input, a, div тощо).
-import org.openqa.selenium.support.FindBy; // анотація Page Object Model (POM) для позначення локаторів полів у класі.
-import org.openqa.selenium.support.PageFactory; // утиліта Selenium, яка ініціалізує поля з @FindBy (створює проксі-об'єкти, котрі шукають елементи при першому зверненні).
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
-import java.util.List; // стандартний java.util.List для списків елементів.
-import java.util.stream.Collectors; // утиліта для роботи зі Stream API (тут використовується для збирання текстів елементів в List<String>).
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
-
-/* Тести що потрібно зробити
-UI:
-RGU-2
-RGU-3
-ACU-5
-ADU-3
-
-API:
-RGA-2
-ACA-1
-ACA-2
-*/
 
 // Оголошення класу і поле driver
-public class HomePage { // POM-клас, що представляє сторінку Home.
-    private WebDriver driver; // екземпляр драйвера, що використовується усіма методами цього Page Object.
-    // private — інкапсуляція: інші класи не бачать прямий доступ до драйвера через це поле.
+public class HomePage {
+    private WebDriver driver;
 
-    // Конструктор приймає driver. PageFactory.initElements(driver, this) ініціалізує всі елементи з анотаціями @FindBy.
-    // Конструктор приймає вже створений WebDriver (звичайно тестовий код створює драйвер і передає у Page Object).
+
     public HomePage(WebDriver driver) {
-        this.driver = driver; // зберігаємо драйвер у полі класу.
-        PageFactory.initElements(driver, this); // Ініціалізує усі поля з анотаціями @FindBy.
-
-        /*Як працює (суть):
-        створює проксі-об'єкти для WebElement полів —
-        фактичний пошук елементів в DOM відбудеться не під час ініціалізації конструктора,
-        а при першому зверненні до поля (lazy lookup).*/
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
     }
 
-    // Локатори (поля з @FindBy)
+    // Локатори
 
-    // Локатор шукає <a> (або інший посилання) з видимим текстом точно "Register".
-    // Шукає елемент за видимим текстом посилання. Чутливий до точного тексту.
     @FindBy(linkText = "Register")
-    public WebElement registrationPageLink; // public — елемент відкритий для інших класів.
+    public WebElement registrationPageLink;
 
-    // Аналогічно: посилання з текстом "Request Loan".
     @FindBy(linkText = "Request Loan")
     public WebElement requestLoanLink;
 
-    // Шукає елемент за id="leftPanel". Це контейнер логіну.
-    // Шукає по id (швидко і надійно якщо id стабільний).
     @FindBy(id = "leftPanel")
     private WebElement leftPanel;
 
-    // Xpath знаходить h2, текст якого точно дорівнює "Customer Login".
     @FindBy(xpath = "//h2[text()='Customer Login']")
     private WebElement customerLoginHeader;
 
-    // Xpath шукає будь-який елемент (*) у якого атрибут class точно рівний 'services'
-    // дуже гнучкий, але більш повільний і часто крихкий (чутливий до тексту і структури DOM).
+    @FindBy(xpath = "//div[@id='rightPanel']/h1[contains(text(),'Welcome ')]")
+    private WebElement rightPanelWelcomeMessage;
+
+    @FindBy(xpath = "//p[@class='smallText']")
+    private WebElement LeftPanelWelcomeMessage;
+
+
+
+    // welcome page sections
     @FindBy(xpath = "//*[@class='services']")
     private WebElement servicesOne;
-
-    // Аналогічно для другого блоку: Online Services panel
     @FindBy(xpath = "//*[@class='servicestwo']")
     private WebElement servicesTwo;
 
-    // Заголовок Latest News — з тією ж приміткою про точний текст.
-    @FindBy(xpath = "//h4[text()='Latest News']")
-    private WebElement newsSection;
-
-    // CSS-селектор: знайди ul з класом services, в ньому всі li, які не мають класу captionone (li:not(.captionone)), і з цих li візьми елементи a (посилання).
-    // компактний і швидкий, добре підтримує класи (.classname) і псевдокласи (:not(...)).
+    // sections lists
     @FindBy(css = "ul.services li:not(.captionone) a")
-    private List<WebElement> atmServices; // Повертається List<WebElement> — колекція усіх знайдених елементів
-
-    // Те саме для другого списку: Online Services list
+    private List<WebElement> atmServices;
     @FindBy(css = "ul.servicestwo li:not(.captionone) a")
     private List<WebElement> onlineServices;
 
-    // Локатори полів логіну: знаходяться за атрибутами name (username/password) і кнопка — input з класом button і типом submit.
-    // Шукає по name-атрибуту (звично для input)
+    // Latest News section
+    @FindBy(xpath = "//h4[text()='Latest News']")
+    private WebElement newsSection;
+
+    // LogIn to bank locators
     @FindBy(name = "username")
     private WebElement userLogin;
     @FindBy(name = "password")
     private WebElement userPassword;
-    // Локатор для кнопки Register
-    @FindBy(css = "input.button[type='submit']")
+    @FindBy(xpath = "//input[@value='Log In']")
     private WebElement logInButton;
+
+
+    private By latestNewsHeader = By.xpath(".//*[text()='Latest News']");
+    private By newsItems = By.cssSelector(".news-item");
+
+
 
     // Методи (поведінка сторінки)
     public String getCustomerLoginHeaderText() {
@@ -113,10 +96,6 @@ public class HomePage { // POM-клас, що представляє сторі�
         return newsSection.isDisplayed();
     }
 
-    /*Тут відбувається:
-    Беремо список atmServices (WebElement).
-    Через Stream API викликаємо для кожного елемента getText() (скорочено WebElement::getText — method reference).
-    Збираємо у List<String> (список текстів посилань).*/
     public List<String> getATMServicesTexts() {
         return atmServices.stream()
                 .map(WebElement::getText)
@@ -129,12 +108,6 @@ public class HomePage { // POM-клас, що представляє сторі�
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-    /*Зауваження:
-    Якщо списку ще немає (DOM не готовий), може повернутися порожній список або виклик кине виняток
-    (залежить від того як PageFactory проксі обробляє findElements). Частіше — порожній список.
-    Рекомендується trim() текстів якщо очікуються зайві пробіли: .map(e -> e.getText().trim()).
-    Якщо елементи динамічно з’являються, краще використовувати
-    WebDriverWait + visibilityOfAllElementsLocatedBy.*/
 
     // Натискає посилання "Register" → навігація на іншу сторінку.
     public void goToRegistration() {
@@ -146,12 +119,41 @@ public class HomePage { // POM-клас, що представляє сторі�
         requestLoanLink.click();
     }
 
-
     // Метод автоматично вводить логін/пароль
     public void userLogIn(String username, String password) {
         userLogin.sendKeys(username);
         userPassword.sendKeys(password);
         logInButton.click();
+    }
 
+    public boolean isNewsSectionDisplayed() {
+        return newsSection.isDisplayed();
+    }
+
+    public boolean newsSectionContainsTodayDate() {
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
+        String text = newsSection.getText();
+        return text.contains(today);
+    }
+
+    public boolean isLatestNewsOverBlueBackground() {
+        WebElement header = newsSection.findElement(latestNewsHeader);
+        String color = header.getCssValue("background-color");
+        return color.contains("rgba(0, 0, 255") || color.contains("blue");
+    }
+
+    public long getNewsWithNewLabelCount() {
+        List<WebElement> items = newsSection.findElements(newsItems);
+        return items.stream()
+                .filter(item -> item.getText().contains("New!"))
+                .count();
+    }
+
+    public String getRightPanelWelcomeText() {
+        return rightPanelWelcomeMessage.getText();
+    }
+
+    public String getLeftPanelWelcomeText() {
+        return LeftPanelWelcomeMessage.getText();
     }
 }

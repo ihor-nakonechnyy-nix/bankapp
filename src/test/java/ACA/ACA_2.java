@@ -1,4 +1,4 @@
-    package ACA;
+package ACA;
 
     import io.restassured.RestAssured;
     import io.restassured.path.xml.XmlPath;
@@ -10,6 +10,8 @@
     import static io.restassured.RestAssured.given;
     import static org.testng.Assert.assertEquals;
     import static org.testng.Assert.assertTrue;
+
+    // потрібно дізнатися чому не прицює поповнення рахунку отримувача хоча показує успіх при виконанні тесту
 
     public class ACA_2 {
 
@@ -25,18 +27,18 @@
             double amount = 15.00;
 
             double fromBalanceBefore = getAccountBalance(fromAccountId);
-            double toBalanceBefore = getAccountBalance(toAccountId);
+            //double toBalanceBefore = getAccountBalance(toAccountId);
 
             String requestBody = """
                                     {
-                              "name": "ihor",
+                              "name": "John",
                               "address": {
-                                "street": "test address, 1001 Line 1",
-                                "city": "Miami",
-                                "state": "FL",
-                                "zipCode": "12656"
+                                "street": "1431 Main St",
+                                "city": "Beverly Hills",
+                                "state": "CA",
+                                "zipCode": "90210"
                               },
-                              "phoneNumber": "0976216246",
+                              "phoneNumber": "310-447-4121",
                               "accountNumber": 13566
                             }
                     """;
@@ -52,10 +54,10 @@
                     .extract().response();
 
               double fromBalanceAfter = getAccountBalance(fromAccountId);
-              //double toBalanceAfter = getAccountBalance(toAccountId);
+              double toBalanceAfter = getAccountBalance(toAccountId);
 
             System.out.println(fromBalanceAfter);
-            // System.out.println(toBalanceAfter);
+            System.out.println(toBalanceAfter);
 
             assertEquals(fromBalanceAfter, fromBalanceBefore - amount, 0.01);
             //assertEquals(toBalanceAfter, toBalanceBefore + amount, 0.01);

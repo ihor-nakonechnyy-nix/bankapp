@@ -35,7 +35,7 @@ public class RGU_2 {
 
     @Test
     public void testUserRegistration() {
-        homePage.registrationPageLink.click();
+        //homePage.registrationPageLink.click();
 
         // Переходимо на сторінку реєстрації
         homePage.goToRegistration();

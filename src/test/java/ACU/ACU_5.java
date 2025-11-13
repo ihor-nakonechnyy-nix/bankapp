@@ -46,9 +46,9 @@ public class ACU_5 {
 
     @Test
     public void testApplyLoan() {
-        homePage.userLogIn("ihor", "demo");
+        homePage.userLogIn("john    ", "demo");
         homePage.goRequestLoanPage();
-        //requestLoanPage.applyForLoan(100, 20);
+        requestLoanPage.applyForLoan(100, 20);
 //        requestLoanPage.getLoanRequestProcessedTitle();
 //        requestLoanPage.getLoanProviderName();
 //        requestLoanPage.getLoanStatus();
