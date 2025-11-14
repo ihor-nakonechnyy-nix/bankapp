@@ -37,6 +37,7 @@ public class RegistrationPage {
     private By repeatedPasswordError = By.id("repeatedPassword.errors");
 
 
+
     // Метод для заповення форми реєстрації
     public void fillFormForExistUserVerification(String firstName, String lastName, String street,
                                                  String city, String state, String zipCode,
