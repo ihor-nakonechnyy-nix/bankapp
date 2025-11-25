@@ -56,9 +56,6 @@ public class RGU_3 {
         Assert.assertEquals(repeatedPasswordErrorTest, "Password confirmation is required.");
     }
 
-
-
-
     @AfterMethod
     public void teardown() {
         if (driver != null) {

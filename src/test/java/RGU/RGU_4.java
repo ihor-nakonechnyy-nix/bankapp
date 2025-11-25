@@ -54,4 +54,11 @@ public class RGU_4 {
         String repeatedPasswordErrorTest = registrationPage.getRepeatPasswordErrorMessageText();
         Assert.assertEquals(repeatedPasswordErrorTest, "Passwords did not match.");
     }
+
+    @AfterMethod
+    public void teardown() {
+        if (driver != null) {
+            //driver.quit(); // Закриваємо браузер
+        }
+    }
 }

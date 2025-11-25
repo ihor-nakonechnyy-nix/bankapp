@@ -26,19 +26,12 @@ public class SMU_3 {
         options.addArguments("--disable-features=PasswordChangeDetection,PasswordLeakDetection,AutofillKeyedPasswords");
         options.addArguments("--incognito");
         options.addArguments("--disable-popup-blocking");
-        homePage = new HomePage(driver);
 
         driver = new ChromeDriver(options);
+        homePage = new HomePage(driver);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("http://localhost:8080/parabank/index.htm");
-    }
-
-    @AfterMethod
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
     }
 
     @Test
@@ -56,5 +49,12 @@ public class SMU_3 {
         // 4️⃣ Two of three news items contain 'New!'
         long count = homePage.getNewsWithNewLabelCount();
         Assert.assertTrue(count >= 2, "Less than 2 news items contain 'New!'");
+    }
+
+    @AfterMethod
+    public void tearDown() {
+        if (driver != null) {
+            //driver.quit();
+        }
     }
 }

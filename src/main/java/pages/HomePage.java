@@ -22,7 +22,16 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    // Локатори
+    // локатор для посилання на сторінку Accounts Overview
+    @FindBy(linkText = "Accounts Overview")
+    WebElement accountsOverviewBtn;
+
+    // локатор для посилання на сторінку Open New Account
+    @FindBy(linkText = "Open New Account")
+    WebElement openNewAccountBtn;
+
+
+
 
     @FindBy(linkText = "Register")
     public WebElement registrationPageLink;
@@ -74,16 +83,14 @@ public class HomePage {
 
 
 
-    // Методи (поведінка сторінки)
     public String getCustomerLoginHeaderText() {
         return customerLoginHeader.getText(); // getText() повертає видимий текст елемента (без HTML).
     }
 
     public boolean isLeftPanelDisplayed() {
-        return leftPanel.isDisplayed(); // isDisplayed() повертає true якщо елемент у DOM і видимий для користувача.
+        return leftPanel.isDisplayed();
     }
 
-    // Аналогічні перевірки видимості для різних секцій. Знову: краще чекати видимість явно, ніж орієнтуватися на миттєвий виклик.
     public boolean isServicesOneDisplayed() {
         return servicesOne.isDisplayed();
     }
@@ -102,24 +109,20 @@ public class HomePage {
                 .collect(Collectors.toList());
     }
 
-    // Те ж саме для онлайн-сервісів.
     public List<String> getOnlineServicesTexts() {
         return onlineServices.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
 
-    // Натискає посилання "Register" → навігація на іншу сторінку.
     public void goToRegistration() {
         registrationPageLink.click();
     }
 
-    // Клік по Request Loan. Перехід по посиланню на сторінку Request Loan
     public void goRequestLoanPage() {
         requestLoanLink.click();
     }
 
-    // Метод автоматично вводить логін/пароль
     public void userLogIn(String username, String password) {
         userLogin.sendKeys(username);
         userPassword.sendKeys(password);
@@ -156,4 +159,16 @@ public class HomePage {
     public String getLeftPanelWelcomeText() {
         return LeftPanelWelcomeMessage.getText();
     }
+
+    // Метод для переходу на сторінку Accounts Overview
+    public void goToAccountsOverview() {
+        accountsOverviewBtn.click();
+    }
+
+    // Метод для переходу на сторінку Accounts Overview
+    public void goToOpenNewAccount() {
+        openNewAccountBtn.click();
+    }
+
+
 }
