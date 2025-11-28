@@ -11,11 +11,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-// Оголошення класу і поле driver
 public class HomePage {
     private WebDriver driver;
-
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -29,8 +26,6 @@ public class HomePage {
     // локатор для посилання на сторінку Open New Account
     @FindBy(linkText = "Open New Account")
     WebElement openNewAccountBtn;
-
-
 
 
     @FindBy(linkText = "Register")
@@ -51,6 +46,8 @@ public class HomePage {
     @FindBy(xpath = "//p[@class='smallText']")
     private WebElement LeftPanelWelcomeMessage;
 
+    @FindBy(xpath = "//a[text()='Transfer Funds']")
+    private WebElement transferFundsLink;
 
 
     // welcome page sections
@@ -81,8 +78,6 @@ public class HomePage {
     private By latestNewsHeader = By.xpath(".//*[text()='Latest News']");
     private By newsItems = By.cssSelector(".news-item");
 
-
-
     public String getCustomerLoginHeaderText() {
         return customerLoginHeader.getText(); // getText() повертає видимий текст елемента (без HTML).
     }
@@ -108,43 +103,35 @@ public class HomePage {
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-
     public List<String> getOnlineServicesTexts() {
         return onlineServices.stream()
                 .map(WebElement::getText)
                 .collect(Collectors.toList());
     }
-
     public void goToRegistration() {
         registrationPageLink.click();
     }
-
     public void goRequestLoanPage() {
         requestLoanLink.click();
     }
-
     public void userLogIn(String username, String password) {
         userLogin.sendKeys(username);
         userPassword.sendKeys(password);
         logInButton.click();
     }
-
     public boolean isNewsSectionDisplayed() {
         return newsSection.isDisplayed();
     }
-
     public boolean newsSectionContainsTodayDate() {
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMM yyyy"));
         String text = newsSection.getText();
         return text.contains(today);
     }
-
     public boolean isLatestNewsOverBlueBackground() {
         WebElement header = newsSection.findElement(latestNewsHeader);
         String color = header.getCssValue("background-color");
         return color.contains("rgba(0, 0, 255") || color.contains("blue");
     }
-
     public long getNewsWithNewLabelCount() {
         List<WebElement> items = newsSection.findElements(newsItems);
         return items.stream()
@@ -155,20 +142,16 @@ public class HomePage {
     public String getRightPanelWelcomeText() {
         return rightPanelWelcomeMessage.getText();
     }
-
     public String getLeftPanelWelcomeText() {
         return LeftPanelWelcomeMessage.getText();
     }
-
-    // Метод для переходу на сторінку Accounts Overview
     public void goToAccountsOverview() {
         accountsOverviewBtn.click();
     }
-
-    // Метод для переходу на сторінку Accounts Overview
     public void goToOpenNewAccount() {
         openNewAccountBtn.click();
     }
-
-
+    public void goToTransferFunds() {
+        transferFundsLink.click();
+    }
 }
