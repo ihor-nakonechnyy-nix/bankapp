@@ -35,7 +35,6 @@ public class AccountsOverviewPage {
     @FindBy(xpath = "//a[text()='13566']/../following-sibling::td")
     WebElement accountToBalance;
 
-
     public double getInitialAccountAmountIndex(int index) {
         String initialAccountAmountValue = driver.findElement(By.xpath("//tr[@class='ng-scope'][" + index + "]/td[2]"))
                 .getText()
@@ -67,15 +66,16 @@ public class AccountsOverviewPage {
     public String getAvailableAmount() {
         return availableAmountValue.getText().replace("$", "").trim();
     }
+
     public String getTotal() {
         return totalValue.getText().replace("$", "").trim();
     }
 
     public String getAccountFromBalance() {
-        return accountFromBalance.getText().replace("$","").trim();
+        return accountFromBalance.getText().replace("$", "").trim();
     }
 
     public String getAccountToBalance() {
-        return accountToBalance.getText().replace("$","").trim();
+        return accountToBalance.getText().replace("$", "").trim();
     }
 }

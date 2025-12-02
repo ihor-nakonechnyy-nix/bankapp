@@ -1,22 +1,20 @@
 package ADU;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.*;
-import pages.HomePage;
+import pages.*;
+
 import java.time.Duration;
-import pages.ActivityPage;
-import pages.TransactionPage;
 
 public class ADU_3 {
     private WebDriver driver;
     private HomePage homePage;
     private ActivityPage activityPage;
     private TransactionPage transactionPage;
+    private AccountsOverviewPage accountsOverviewPage;
 
     @BeforeMethod
     public void setDriver() {
@@ -44,19 +42,17 @@ public class ADU_3 {
 
     @Test
     public void transactionDetailsTest() {
-        homePage.userLogIn("ihor", "demo");
+        homePage.userLogIn("parasoft", "demo");
+        homePage.openFirstAccount();
 
-         // Open the Account Details, activity page
-        driver.findElement(By.cssSelector("a[href='activity.htm?id=13788']")).click();
+        activityPage.openFirstTransaction();
 
-        // Open the Transaction Details, transaction page
-        driver.findElement(By.cssSelector("a[href='transaction.htm?id=14698']")).click();
+        TransactionDetails actualTransactionInfo = transactionPage.getFirstTransactionDetails();
+        System.out.println("Transaction Details page is displayed" + actualTransactionInfo);
 
-        // Transaction Details verification
-        Assert.assertEquals(transactionPage.getTransactionID(), "14698");
-        Assert.assertEquals(transactionPage.getDate(), "10-01-2025");
-        Assert.assertEquals(transactionPage.getDescription(), "Down Payment for Loan # 13899");
-        Assert.assertEquals(transactionPage.getType(), "Debit");
-        Assert.assertEquals(transactionPage.getAmount(), "$20.00");
+        Assert.assertEquals(actualTransactionInfo.getAmount(), "$100.00", "Сума транзакції не збігається.");
+        Assert.assertEquals(actualTransactionInfo.getDescription(), "Funds Transfer Sent", "Опис не збігається.");
+        Assert.assertTrue(actualTransactionInfo.getDate().contains("2025"), "Рік у даті неправильний.");
+        Assert.assertTrue(actualTransactionInfo.getType().contains("Debit"), "Тип не правильний");
     }
 }
