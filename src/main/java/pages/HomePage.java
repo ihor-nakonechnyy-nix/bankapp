@@ -19,38 +19,52 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    // локатор для посилання на сторінку Accounts Overview
-    @FindBy(linkText = "Accounts Overview")
-    WebElement accountsOverviewBtn;
+    // Customer Login section (leftPanel) not functional items
+    @FindBy(id = "leftPanel")
+    private WebElement leftPanel;
+    @FindBy(xpath = "//h2[text()='Customer Login']")
+    private WebElement customerLoginHeader;
 
-    // локатор для посилання на сторінку Open New Account
-    @FindBy(linkText = "Open New Account")
-    WebElement openNewAccountBtn;
 
+
+    // Customer Login functional items (fields and buttons)
+    @FindBy(name = "username")
+    private WebElement userLogin;
+
+    @FindBy(name = "password")
+    private WebElement userPassword;
+
+    @FindBy(xpath = "//input[@value='Log In']")
+    private WebElement logInButton;
 
     @FindBy(linkText = "Register")
     public WebElement registrationPageLink;
 
+    // Account Services left menu links
+    @FindBy(linkText = "Open New Account")
+    WebElement openNewAccountLink;
+
+    @FindBy(linkText = "Accounts Overview")
+    WebElement accountsOverviewLink;
+
+    @FindBy(xpath = "//a[text()='Transfer Funds']")
+    private WebElement transferFundsLink;
+
+    @FindBy(linkText = "Bill Pay")
+    public WebElement billPayLink;
+
     @FindBy(linkText = "Request Loan")
     public WebElement requestLoanLink;
 
-    @FindBy(id = "leftPanel")
-    private WebElement leftPanel;
 
-    @FindBy(xpath = "//h2[text()='Customer Login']")
-    private WebElement customerLoginHeader;
-
+    // Index page blocks
     @FindBy(xpath = "//div[@id='rightPanel']/h1[contains(text(),'Welcome ')]")
     private WebElement rightPanelWelcomeMessage;
 
     @FindBy(xpath = "//p[@class='smallText']")
     private WebElement LeftPanelWelcomeMessage;
 
-    @FindBy(xpath = "//a[text()='Transfer Funds']")
-    private WebElement transferFundsLink;
 
-
-    // welcome page sections
     @FindBy(xpath = "//*[@class='services']")
     private WebElement servicesOne;
     @FindBy(xpath = "//*[@class='servicestwo']")
@@ -65,19 +79,11 @@ public class HomePage {
     // Latest News section
     @FindBy(xpath = "//h4[text()='Latest News']")
     private WebElement newsSection;
-
-    // LogIn to bank locators
-    @FindBy(name = "username")
-    private WebElement userLogin;
-    @FindBy(name = "password")
-    private WebElement userPassword;
-    @FindBy(xpath = "//input[@value='Log In']")
-    private WebElement logInButton;
-
-
     private By latestNewsHeader = By.xpath(".//*[text()='Latest News']");
     private By newsItems = By.cssSelector(".news-item");
 
+
+    //functional methods
     public String getCustomerLoginHeaderText() {
         return customerLoginHeader.getText(); // getText() повертає видимий текст елемента (без HTML).
     }
@@ -145,13 +151,18 @@ public class HomePage {
     public String getLeftPanelWelcomeText() {
         return LeftPanelWelcomeMessage.getText();
     }
+
+
     public void goToAccountsOverview() {
-        accountsOverviewBtn.click();
+        accountsOverviewLink.click();
     }
     public void goToOpenNewAccount() {
-        openNewAccountBtn.click();
+        openNewAccountLink.click();
     }
     public void goToTransferFunds() {
         transferFundsLink.click();
+    }
+    public void goBillPayLink() {
+        billPayLink.click();
     }
 }

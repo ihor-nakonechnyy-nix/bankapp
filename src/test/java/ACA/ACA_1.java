@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
 public class ACA_1 {
 
@@ -55,7 +54,6 @@ public class ACA_1 {
                 .then()
                 .statusCode(200)
                 .extract().asString();
-
     }
 
     private double getAccountBalance(String accountId) {
@@ -68,6 +66,5 @@ public class ACA_1 {
 
         XmlPath xml = new XmlPath(response.asString());
         return xml.getDouble("account.balance");
-
     }
 }
