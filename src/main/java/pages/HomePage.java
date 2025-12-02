@@ -57,6 +57,14 @@ public class HomePage {
     public WebElement requestLoanLink;
 
 
+
+    @FindBy(xpath = "//table[@id='accountTable']//tr[1]/td[1]/a")
+    WebElement accountTableFirstAccount;
+
+
+
+
+
     // Index page blocks
     @FindBy(xpath = "//div[@id='rightPanel']/h1[contains(text(),'Welcome ')]")
     private WebElement rightPanelWelcomeMessage;
@@ -164,5 +172,9 @@ public class HomePage {
     }
     public void goBillPayLink() {
         billPayLink.click();
+    }
+
+    public void openFirstAccount() {
+        accountTableFirstAccount.click();
     }
 }
