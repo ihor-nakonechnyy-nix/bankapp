@@ -1,6 +1,5 @@
 package ADU;
 
-import com.beust.ah.A;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -51,5 +50,11 @@ public class ADU_1 {
         Assert.assertTrue(activityPage.balanceIsDisplayed(), "Balance is not displayed");
         Assert.assertTrue(activityPage.availableBalanceIsDisplayed(), "Available Balance is not displayed");
 
+        Assert.assertEquals(activityPage.isAllSelectedByDefaultForActivityPeriodFilter(), "All",
+                "Default selected period is not 'All'");
+
+        Assert.assertEquals(activityPage.isAllSelectedByDefaultForTransactionTypeFilter(), "All",
+                "Default selected period is not 'All'");
     }
 }
+

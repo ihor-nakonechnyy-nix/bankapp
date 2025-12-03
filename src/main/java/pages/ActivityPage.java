@@ -32,6 +32,7 @@ public class ActivityPage {
     WebElement transactionTypeFilter;
 
 
+
     @FindBy(xpath = "//table[@id='transactionTable']//tr[1]/td[2]")
     WebElement transactionTableFirstTransaction;
 
@@ -52,16 +53,18 @@ public class ActivityPage {
         availableBalance.isDisplayed();
         return true;
     }
-    public String isAllSelectedByDefault() {
+    public String isAllSelectedByDefaultForActivityPeriodFilter() {
         Select select = new Select(ActivityPeriodFilter);
         return select.getFirstSelectedOption().getText().trim();
 
     }
+    public String isAllSelectedByDefaultForTransactionTypeFilter() {
+        Select select = new Select(transactionTypeFilter);
+        return select.getFirstSelectedOption().getText().trim();
 
-
-    public boolean openFirstTransaction() {
-        transactionTableFirstTransaction.click();
-        return true;
     }
 
+    public void openFirstTransaction() {
+        transactionTableFirstTransaction.click();
+    }
 }
